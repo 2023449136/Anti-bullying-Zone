@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Bullying!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      font-family: 'Nunito', sans-serif;
+    }
+    
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: currentColor;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    
+    .bounce-in {
+      animation: bounceIn 0.6s ease-out;
+    }
+    
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    
+    .slide-up {
+      animation: slideUp 0.5s ease-out forwards;
+      opacity: 0;
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .pulse-gentle {
+      animation: pulseGentle 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulseGentle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53, #FFD93D);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .progress-bar {
+      transition: width 0.8s ease-out;
+    }
+    
+    .topic-card {
+      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .topic-card:hover {
+      border-color: #818cf8;
+      box-shadow: 0 20px 40px rgba(129, 140, 248, 0.2);
+    }
+    
+    .emoji-float {
+      animation: emojiFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes emojiFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-5px) rotate(5deg); }
+      75% { transform: translateY(5px) rotate(-5deg); }
+    }
+    
+    .page-transition {
+      animation: fadeIn 0.4s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .cit-badge {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    }
+    
+    .accordion-content.open {
+      max-height: 500px;
+    }
+    
+    .tip-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tip-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .tip-card:hover::before {
+      left: 100%;
+    }
+    
+
+
+    .pinterest-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(180deg, #fef3f2 0%, #fdf4ff 50%, #eef2ff 100%);">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-purple-100 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
+            <span class="text-3xl">🛡️</span>
+            <span id="site-title" class="font-black text-xl text-purple-700">Stop Bullying!</span>
+          </div>
+          <div class="hidden md:flex items-center gap-6">
+            <button onclick="navigateTo('home')" class="nav-link text-purple-700 font-semibold" data-page="home">🏠 Home</button>
+            <button onclick="navigateTo('topic1')" class="nav-link text-purple-700 font-semibold" data-page="topic1">📚 Understanding</button>
+            <button onclick="navigateTo('topic2')" class="nav-link text-purple-700 font-semibold" data-page="topic2">💔 Effects</button>
+            <button onclick="navigateTo('topic3')" class="nav-link text-purple-700 font-semibold" data-page="topic3">💪 Take Action</button>
+          </div>
+          <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-purple-700">☰</button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2 space-y-2">
+          <button onclick="navigateTo('home')" class="block w-full text-left px-4 py-2 rounded-lg bg-purple-50 text-purple-700 font-semibold">🏠 Home</button>
+          <button onclick="navigateTo('topic1')" class="block w-full text-left px-4 py-2 rounded-lg bg-purple-50 text-purple-700 font-semibold">📚 Understanding Bullying</button>
+          <button onclick="navigateTo('topic2')" class="block w-full text-left px-4 py-2 rounded-lg bg-purple-50 text-purple-700 font-semibold">💔 Effects of Bullying</button>
+          <button onclick="navigateTo('topic3')" class="block w-full text-left px-4 py-2 rounded-lg bg-purple-50 text-purple-700 font-semibold">💪 Take Action</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="h-1 bg-purple-100">
+      <div id="progress-bar" class="progress-bar h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500" style="width: 0%"></div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main id="content" class="max-w-6xl mx-auto px-4 py-8">
+      
+      <!-- HOME PAGE -->
+      <div id="page-home" class="page page-transition">
+        <!-- Hero Section -->
+        <div class="relative rounded-3xl overflow-hidden hero-gradient p-8 md:p-12 mb-12 text-white">
+          <div class="absolute top-4 right-4 text-6xl opacity-20 floating">🛡️</div>
+          <div class="absolute bottom-4 left-4 text-4xl opacity-20 emoji-float">💜</div>
+          
+          <div class="relative z-10 text-center">
+            <div class="inline-block mb-4 px-4 py-1 bg-white/20 rounded-full text-sm font-semibold backdrop-blur-sm">
+              📘 MC246 - Young Instructional Designer
+            </div>
+            <h1 id="homepage-heading" class="text-4xl md:text-6xl font-black mb-4 bounce-in">
+              Together We Can<br>Stop Bullying! 🌟
+            </h1>
+            <p class="text-lg md:text-xl opacity-90 max-w-2xl mx-auto mb-8">
+              Learn about bullying, understand its effects, and discover how YOU can make a difference. 
+              Everyone deserves to feel safe and respected! 
+            </p>
+            <button onclick="navigateTo('topic1')" class="inline-flex items-center gap-2 bg-white text-purple-700 font-bold px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg pulse-gentle">
+              Start Learning 🚀
+            </button>
+          </div>
+        </div>
+
+        <!-- Overview Cards -->
+        <h2 class="text-2xl md:text-3xl font-black text-center text-purple-800 mb-8">
+          What You'll Learn 📖
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+          <!-- Topic 1 Card -->
+          <div onclick="navigateTo('topic1')" class="topic-card card-hover cursor-pointer rounded-2xl p-6 shadow-lg">
+            <div class="text-5xl mb-4 emoji-float">📚</div>
+            <h3 class="text-xl font-bold text-purple-800 mb-2">Understanding Bullying</h3>
+            <p class="text-gray-600 text-sm mb-4">Learn what bullying is and discover the different types that exist.</p>
+            <div class="flex items-center text-purple-600 font-semibold text-sm">
+              <span>Explore Topic</span>
+              <span class="ml-2">→</span>
+            </div>
+          </div>
+          
+          <!-- Topic 2 Card -->
+          <div onclick="navigateTo('topic2')" class="topic-card card-hover cursor-pointer rounded-2xl p-6 shadow-lg">
+            <div class="text-5xl mb-4 emoji-float" style="animation-delay: 0.5s;">💔</div>
+            <h3 class="text-xl font-bold text-purple-800 mb-2">Effects of Bullying</h3>
+            <p class="text-gray-600 text-sm mb-4">Understand why bullying matters and how it impacts everyone involved.</p>
+            <div class="flex items-center text-purple-600 font-semibold text-sm">
+              <span>Explore Topic</span>
+              <span class="ml-2">→</span>
+            </div>
+          </div>
+          
+          <!-- Topic 3 Card -->
+          <div onclick="navigateTo('topic3')" class="topic-card card-hover cursor-pointer rounded-2xl p-6 shadow-lg">
+            <div class="text-5xl mb-4 emoji-float" style="animation-delay: 1s;">💪</div>
+            <h3 class="text-xl font-bold text-purple-800 mb-2">What Can You Do?</h3>
+            <p class="text-gray-600 text-sm mb-4">Discover how to speak up, help others, and create a safe environment.</p>
+            <div class="flex items-center text-purple-600 font-semibold text-sm">
+              <span>Explore Topic</span>
+              <span class="ml-2">→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning Objectives -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-purple-100 mb-8">
+          <h3 class="text-xl font-bold text-purple-800 mb-6 flex items-center gap-2">
+            <span class="text-2xl">🎯</span> Learning Objectives
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-pink-50 to-transparent rounded-xl">
+              <span class="flex-shrink-0 w-8 h-8 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold">1</span>
+              <p class="text-gray-700"><strong>Identify and categorize</strong> different types of bullying.</p>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-purple-50 to-transparent rounded-xl">
+              <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold">2</span>
+              <p class="text-gray-700"><strong>Understand the importance</strong> of preventing bullying.</p>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-indigo-50 to-transparent rounded-xl">
+              <span class="flex-shrink-0 w-8 h-8 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold">3</span>
+              <p class="text-gray-700"><strong>Advocate for anti-bullying</strong> and a safe learning environment.</p>
+            </div>
+          </div>
+        </div>
+		  
+		  <!-- Pinterest Links -->
+      
+      <div class="pinterest-container">
+        <iframe src="https://assets.pinterest.com/ext/embed.html?id=978266350333984229" height="438" width="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+
+        <!-- CIT Badge -->
+        <div class="cit-badge rounded-2xl p-6 text-white text-center">
+          <div class="flex items-center justify-center gap-3 mb-2">
+            <span class="text-3xl">🎓</span>
+            <span class="font-bold text-lg">MC246 - Young Instructional Designer</span>
+          </div>
+          <p class="opacity-90 text-sm">Creating educational content to make learning engaging and meaningful</p>
+        </div>
+      </div>
+
+      <!-- TOPIC 1 PAGE -->
+      <div id="page-topic1" class="page page-transition hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl p-6 md:p-8 text-white mb-8">
+          <div class="flex items-center gap-2 text-sm font-semibold opacity-80 mb-2">
+            <span>📘 Topic 1</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-black mb-4">Understanding Bullying 📚</h1>
+          <p class="text-lg opacity-90">Learn what bullying is and discover the different types that exist.</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-pink-100 mb-8">
+          <div class="flex justify-center">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/21RQGH2M79g?si=A37OO5Yx4kiZouJz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <p class="text-center mt-4 text-gray-700">Let's Understand Bullying</p>
+        </div>
+
+        <!-- What is Bullying -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-pink-100 mb-8">
+          <h2 class="text-2xl font-bold text-pink-700 mb-4 flex items-center gap-2">
+            <span>❓</span> What Is Bullying?
+          </h2>
+          <div class="bg-pink-50 rounded-xl p-6 mb-4">
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Bullying is when someone <strong class="text-pink-600">keeps being mean on purpose</strong>.<br>
+              It can happen <strong class="text-pink-600">at school, at home, or online</strong>.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 text-gray-600">
+            <span class="text-2xl">💡</span>
+            <span class="text-sm">Remember: Bullying is repeated behavior, not a one-time incident.</span>
+          </div>
+        </div>
+
+        <!-- Types of Bullying -->
+        <h2 class="text-2xl font-bold text-purple-800 mb-6 flex items-center gap-2">
+          <span>🧩</span> Types of Bullying
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <!-- Physical -->
+          <div class="card-hover bg-white rounded-2xl p-6 shadow-lg border-l-4 border-red-500">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-4xl">🤕</span>
+              <h3 class="text-xl font-bold text-red-600">Physical Bullying</h3>
+            </div>
+            <p class="text-gray-600">Hitting, pushing, kicking, or breaking someone's things.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Hitting</span>
+              <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Pushing</span>
+              <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Kicking</span>
+            </div>
+          </div>
+          
+          <!-- Verbal -->
+          <div class="card-hover bg-white rounded-2xl p-6 shadow-lg border-l-4 border-orange-500">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-4xl">🗣️</span>
+              <h3 class="text-xl font-bold text-orange-600">Verbal Bullying</h3>
+            </div>
+            <p class="text-gray-600">Calling names, teasing, or saying mean words.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">Name-calling</span>
+              <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">Teasing</span>
+              <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">Insults</span>
+            </div>
+          </div>
+          
+          <!-- Social -->
+          <div class="card-hover bg-white rounded-2xl p-6 shadow-lg border-l-4 border-purple-500">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-4xl">👥</span>
+              <h3 class="text-xl font-bold text-purple-600">Social Bullying</h3>
+            </div>
+            <p class="text-gray-600">Leaving someone out or spreading rumours.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Exclusion</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Rumours</span>
+              <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Gossip</span>
+            </div>
+          </div>
+          
+          <!-- Cyber -->
+          <div class="card-hover bg-white rounded-2xl p-6 shadow-lg border-l-4 border-blue-500">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-4xl">💻</span>
+              <h3 class="text-xl font-bold text-blue-600">Cyberbullying</h3>
+            </div>
+            <p class="text-gray-600">Sending mean messages or posting hurtful things online.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Mean texts</span>
+              <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Hurtful posts</span>
+              <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Online harassment</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Quiz -->
+        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-6 md:p-8 text-white mb-8">
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <span>🧠</span> Quick Check!
+          </h3>
+          <p class="mb-4">Which type of bullying involves spreading rumours about someone?</p>
+          <div id="quiz1" class="space-y-3">
+            <button onclick="checkQuiz1('physical')" class="quiz-btn w-full text-left px-4 py-3 bg-white/20 hover:bg-white/30 rounded-xl transition-colors">
+              A) Physical Bullying
+            </button>
+            <button onclick="checkQuiz1('social')" class="quiz-btn w-full text-left px-4 py-3 bg-white/20 hover:bg-white/30 rounded-xl transition-colors">
+              B) Social Bullying
+            </button>
+            <button onclick="checkQuiz1('cyber')" class="quiz-btn w-full text-left px-4 py-3 bg-white/20 hover:bg-white/30 rounded-xl transition-colors">
+              C) Cyberbullying
+            </button>
+          </div>
+          <div id="quiz1-result" class="mt-4 hidden"></div>
+        </div>
+
+        <!-- CIT Badge -->
+        <div class="cit-badge rounded-2xl p-6 text-white text-center mb-8">
+          <div class="flex items-center justify-center gap-3 mb-2">
+            <span class="text-3xl">🎓</span>
+            <span class="font-bold text-lg">MC246 - Young Instructional Designer</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+          <button onclick="goBack()" class="flex items-center gap-2 px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-semibold text-gray-700 transition-colors">
+            ← Back
+          </button>
+          <button onclick="navigateTo('topic2')" class="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-colors">
+            Next: Effects of Bullying →
+          </button>
+        </div>
+      </div>
+
+      <!-- TOPIC 2 PAGE -->
+      <div id="page-topic2" class="page page-transition hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 md:p-8 text-white mb-8">
+          <div class="flex items-center gap-2 text-sm font-semibold opacity-80 mb-2">
+            <span>📘 Topic 2</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-black mb-4">Effects of Bullying 💔</h1>
+          <p class="text-lg opacity-90">Understand why bullying matters and how it impacts everyone involved.</p>
+        </div>
+
+        <!-- Why Bullying Matters -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-purple-100 mb-8">
+          <h2 class="text-2xl font-bold text-purple-700 mb-4 flex items-center gap-2">
+            <span>❗</span> Why Bullying Matters
+          </h2>
+          <div class="bg-purple-50 rounded-xl p-6">
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Bullying can hurt people for a long time, not just for one day. It can make someone feel <strong class="text-purple-600">sad, scared, or lonely</strong>, and it can affect how they learn and make friends.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+              Sometimes, the hurt feelings stay even after the bullying stops. This can make a person lose confidence, feel worried, or find it hard to trust others. Bullying can also make school and other places feel <strong class="text-purple-600">unsafe and unhappy</strong>.
+            </p>
+          </div>
+        </div>
+		  
+      <div align="center"><iframe src="https://assets.pinterest.com/ext/embed.html?id=978266350333986386" height="438" width="600" frameborder="0" scrolling="no" ></iframe></div>
+		  
+        <!-- Effects Accordion -->
+        <h2 class="text-2xl font-bold text-purple-800 mb-6 flex items-center gap-2">
+          <span>📊</span> Types of Effects
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <!-- Emotional Effects -->
+          <div class="bg-white rounded-2xl shadow-lg border-2 border-rose-100 overflow-hidden">
+            <button onclick="toggleAccordion('emotional')" class="w-full flex items-center justify-between p-6 text-left">
+              <div class="flex items-center gap-4">
+                <span class="text-4xl">😢</span>
+                <div>
+                  <h3 class="text-xl font-bold text-rose-600">Emotional & Psychological Effects</h3>
+                  <p class="text-gray-500 text-sm">How bullying affects feelings and mental health</p>
+                </div>
+              </div>
+              <span id="emotional-icon" class="text-2xl text-rose-500 transition-transform">+</span>
+            </button>
+            <div id="emotional-content" class="accordion-content px-6">
+              <div class="pb-6 border-t border-rose-100 pt-4">
+                <p class="text-gray-700 leading-relaxed mb-4">
+                  Bullying can hurt how a person feels inside. When someone is bullied again and again, they may feel <strong>worried, stressed, or scared</strong>, and not feel safe.
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                  Bullying can also make a person feel bad about themselves and start to doubt their abilities. Over time, it can make them feel very <strong>sad or afraid</strong>, and stop them from feeling happy and confident.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-semibold">😰 Anxiety</span>
+                  <span class="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-semibold">😞 Depression</span>
+                  <span class="px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-semibold">😟 Low self-esteem</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic Effects -->
+          <div class="bg-white rounded-2xl shadow-lg border-2 border-amber-100 overflow-hidden">
+            <button onclick="toggleAccordion('academic')" class="w-full flex items-center justify-between p-6 text-left">
+              <div class="flex items-center gap-4">
+                <span class="text-4xl">📉</span>
+                <div>
+                  <h3 class="text-xl font-bold text-amber-600">Academic Effects</h3>
+                  <p class="text-gray-500 text-sm">How bullying affects learning and school</p>
+                </div>
+              </div>
+              <span id="academic-icon" class="text-2xl text-amber-500 transition-transform">+</span>
+            </button>
+            <div id="academic-content" class="accordion-content px-6">
+              <div class="pb-6 border-t border-amber-100 pt-4">
+                <p class="text-gray-700 leading-relaxed mb-4">
+                  Bullying can make it hard for students to learn. When someone is being bullied, they may feel worried or distracted, so it is <strong>difficult to pay attention</strong> in class.
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                  This can lead to <strong>lower grades</strong> and not wanting to join lessons or activities. Sometimes, students may even avoid coming to school because they are afraid, which can affect their learning even more.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">📚 Poor concentration</span>
+                  <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">📊 Lower grades</span>
+                  <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">🏫 School avoidance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Effects -->
+          <div class="bg-white rounded-2xl shadow-lg border-2 border-teal-100 overflow-hidden">
+            <button onclick="toggleAccordion('social')" class="w-full flex items-center justify-between p-6 text-left">
+              <div class="flex items-center gap-4">
+                <span class="text-4xl">👤</span>
+                <div>
+                  <h3 class="text-xl font-bold text-teal-600">Social Effects</h3>
+                  <p class="text-gray-500 text-sm">How bullying affects friendships and relationships</p>
+                </div>
+              </div>
+              <span id="social-icon" class="text-2xl text-teal-500 transition-transform">+</span>
+            </button>
+            <div id="social-content" class="accordion-content px-6">
+              <div class="pb-6 border-t border-teal-100 pt-4">
+                <p class="text-gray-700 leading-relaxed mb-4">
+                  Bullying can damage a person's social relationships and sense of belonging. Victims may <strong>withdraw from peers</strong> and experience isolation, feeling excluded or unwanted.
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                  Trust in others can be lost, especially if the bullying comes from classmates or friends. As a result, individuals may find it difficult to <strong>form or maintain friendships</strong>, which can affect their social development and confidence in group settings.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-semibold">🚶 Isolation</span>
+                  <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-semibold">💔 Trust issues</span>
+                  <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-semibold">👥 Difficulty making friends</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div align="center">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/1xZCfov16XE?si=9h8VS-9BNH2N2UXb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <p>Let's have a look on how to be a helper!</p>
+          </div>
+
+          <!-- CIT Badge -->
+          <div class="cit-badge rounded-2xl p-6 text-white text-center mb-8">
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <span class="text-3xl">🎓</span>
+              <span class="font-bold text-lg">MC246 - Young Instructional Designer</span>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="flex justify-between items-center">
+            <button onclick="goBack()" class="flex items-center gap-2 px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-semibold text-gray-700 transition-colors">
+              ← Back
+            </button>
+            <button onclick="navigateTo('topic3')" class="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-colors">
+              Next: Take Action →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOPIC 3 PAGE -->
+      <div id="page-topic3" class="page page-transition hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-6 md:p-8 text-white mb-8">
+          <div class="flex items-center gap-2 text-sm font-semibold opacity-80 mb-2">
+            <span>📘 Topic 3</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-black mb-4">What Can You Do? 💪</h1>
+          <p class="text-lg opacity-90">Speak Up! Stop Bullying - Learn how to take action and make a difference.</p>
+        </div>
+
+        <!-- If Being Bullied Section -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-emerald-100 mb-8">
+          <h2 class="text-2xl font-bold text-emerald-700 mb-4 flex items-center gap-2">
+            <span>🆘</span> If Someone Is Bullying You
+          </h2>
+          <div class="bg-emerald-50 rounded-xl p-6 mb-6">
+            <p class="text-lg text-gray-700 leading-relaxed">
+              If someone is bullying you, remember <strong class="text-emerald-600">you are not alone</strong>. Help is always nearby!
+              Bullying is <strong class="text-emerald-600">never your fault</strong>, and telling a trusted adult is a brave and smart way to stop it.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <!-- Tip 1 -->
+            <div class="tip-card card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-5 border-2 border-blue-200">
+              <div class="text-4xl mb-3">😌</div>
+              <h4 class="font-bold text-blue-700 mb-2">Stay Calm & Ask for Help</h4>
+              <p class="text-gray-600 text-sm">Try to stay calm and don't let the bully see it upset you. If you feel scared, walk away safely and tell a trusted adult.</p>
+            </div>
+            
+            <!-- Tip 2 -->
+            <div class="tip-card card-hover bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-5 border-2 border-purple-200">
+              <div class="text-4xl mb-3">🗣️</div>
+              <h4 class="font-bold text-purple-700 mb-2">Tell a Trusted Adult</h4>
+              <p class="text-gray-600 text-sm">Talk to a parent, teacher, or another adult you trust. They can help you stay safe and stop the bullying.</p>
+            </div>
+            
+            <!-- Tip 3 -->
+            <div class="tip-card card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-5 border-2 border-indigo-200">
+              <div class="text-4xl mb-3">📱</div>
+              <h4 class="font-bold text-indigo-700 mb-2">Keep Evidence</h4>
+              <p class="text-gray-600 text-sm">If someone is bullying you online, save texts, screenshots, or posts. This helps adults see what's happening.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- If You Witness Section -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-amber-100 mb-8">
+          <h2 class="text-2xl font-bold text-amber-700 mb-4 flex items-center gap-2">
+            <span>👀</span> If You Witness Bullying
+          </h2>
+          <div class="bg-amber-50 rounded-xl p-6 mb-6">
+            <p class="text-gray-700 leading-relaxed">
+              If you witness bullying, your actions can make a <strong class="text-amber-600">big difference</strong>. Standing up against bullying helps create a safer and more respectful environment for everyone. Even <strong class="text-amber-600">small actions</strong> can help stop the behavior and support those who are being targeted.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Speak Up -->
+            <div class="card-hover bg-gradient-to-br from-rose-50 to-rose-100 rounded-xl p-6 border-2 border-rose-200">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-4xl">📢</span>
+                <h4 class="font-bold text-rose-700 text-lg">Speak Up (If Safe)</h4>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">
+                If you feel safe doing so, calmly speak up and let the bully know that their behavior is not acceptable. Sometimes, bullying stops when others show that they do not support it.
+              </p>
+              <div class="bg-white/70 rounded-lg p-3 text-xs text-rose-600 font-semibold">
+                ⚠️ Never put yourself in danger—your safety should always come first.
+              </div>
+            </div>
+
+            <!-- Support -->
+            <div class="card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl p-6 border-2 border-cyan-200">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-4xl">🤝</span>
+                <h4 class="font-bold text-cyan-700 text-lg">Support the Victim</h4>
+              </div>
+              <p class="text-gray-600 text-sm mb-4">
+                Check on the person being bullied. Let them know you care and that what happened was not okay. A kind word can make a huge difference.
+              </p>
+              <div class="bg-white/70 rounded-lg p-3 text-xs text-cyan-600 font-semibold">
+                💙 Be a friend when someone needs one most.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Pledge -->
+        <div class="bg-gradient-to-r from-violet-600 to-purple-700 rounded-2xl p-6 md:p-8 text-white mb-8">
+          <h3 class="text-xl font-bold mb-4 text-center flex items-center justify-center gap-2">
+            <span>✋</span> Take the Pledge!
+          </h3>
+          <p class="text-center mb-6 opacity-90">Promise to help create a bully-free environment</p>
+          <div id="pledge-container" class="text-center">
+            <button id="pledge-btn" onclick="takePledge()" class="inline-flex items-center gap-2 bg-white text-purple-700 font-bold px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-lg">
+              I Take the Pledge! 🌟
+            </button>
+          </div>
+          <div id="pledge-result" class="hidden text-center mt-4">
+            <div class="inline-block bg-white/20 backdrop-blur-sm rounded-xl p-6">
+              <span class="text-5xl block mb-2">🎉</span>
+              <p class="font-bold text-lg">Thank you for taking the pledge!</p>
+              <p class="text-sm opacity-80">Together, we can stop bullying.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-purple-100 mb-8">
+          <h3 class="text-xl font-bold text-purple-800 mb-6 flex items-center gap-2">
+            <span>🔑</span> Key Takeaways
+          </h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
+              <span class="text-2xl">✅</span>
+              <p class="text-gray-700 text-sm">Bullying is <strong>never</strong> the victim's fault</p>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
+              <span class="text-2xl">✅</span>
+              <p class="text-gray-700 text-sm">Telling an adult is <strong>brave</strong>, not weak</p>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
+              <span class="text-2xl">✅</span>
+              <p class="text-gray-700 text-sm">Bystanders have the <strong>power</strong> to help stop bullying</p>
+            </div>
+            <div class="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
+              <span class="text-2xl">✅</span>
+              <p class="text-gray-700 text-sm">Small acts of <strong>kindness</strong> make a big difference</p>
+            </div>
+          </div>
+        </div>
+<div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-8 border-2 border-blue-200">
+  <h3 class="text-xl font-bold text-blue-700 mb-4 flex items-center gap-2">
+    <span class="text-2xl">📞</span> Need Help? Contact Here
+  </h3>
+  
+  <div class="space-y-4">
+    <!-- Portal Aduan Buli -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-blue-100">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="text-2xl text-blue-500">🌐</span>
+        <div>
+          <p class="font-semibold text-gray-700">Bullying Complaint Portal</p>
+          <a href="https://aduanbuli.moe.gov.my" 
+             target="_blank" 
+             class="text-blue-600 hover:text-blue-800 hover:underline transition-colors text-sm">
+            aduanbuli.moe.gov.my
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotline -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-green-100">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="text-2xl text-green-500">📞</span>
+        <div>
+          <p class="font-semibold text-gray-700">Hotline</p>
+          <a href="tel:03-88849352" 
+             class="text-green-600 hover:text-green-800 hover:underline transition-colors text-sm">
+            03-88849352
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-green-100">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="text-2xl text-green-500">💬</span>
+        <div>
+          <p class="font-semibold text-gray-700">WhatsApp</p>
+          <a href="https://wa.me/60148009325" 
+             target="_blank"
+             class="text-green-600 hover:text-green-800 hover:underline transition-colors text-sm">
+            014-800 9325
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- Padlet Section -->
+        <div class="bg-gradient-to-r from-teal-500 to-cyan-600 rounded-2xl p-6 md:p-8 text-white mb-8">
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <span>💬</span> Share Your Thoughts & Experiences
+          </h3>
+          <p class="mb-4 opacity-90">Join the conversation about bullying effects. Share anonymously or read others' experiences.</p>
+          
+          <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/ycc42yor7qifx65r" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p><div style="display:flex;align-items:center;justify-content:end;margin:0;padding:8px 8px 8px 0"><a href="https://padlet.com?ref=embed" style="display:flex;align-items:center;gap:5px;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank"><span aria-hidden style="color:#9E9E9E;font-size:10px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1">Made with</span><img src="https://padlet.net/emails/padlet_email_logo_2026_text-dark-200.png" height="12" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none;display:block" alt="Made with Padlet"></a></div></div>
+           
+          <div class="mt-4 text-sm opacity-80">
+            <span class="text-lg mr-2">💡</span>
+            <strong>Note:</strong> This is a safe space. Be kind and respectful in your posts.
+          </div>
+        </div>
+
+        <!-- Kahoot Section -->
+        <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-6 md:p-8 text-white mb-8">
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <span>🏆</span> Test Your Knowledge - Kahoot Challenge!
+          </h3>
+          <p class="mb-4 opacity-90">Join our interactive quiz to test what you've learned about bullying types!</p>
+          
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-8 text-center">
+  <span class="text-4xl mb-4 block">🎮</span>
+  <p>Kahoot quiz would be embedded here</p>
+  <a href="https://create.kahoot.it/share/bullying/91eb1722-f999-42e8-8ea6-0833e1e30849" 
+     target="_blank"
+     class="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full hover:from-purple-600 hover:to-pink-600 hover:scale-105 transition-all duration-300 shadow-lg">
+    🎯 Click here to play the Kahoot!
+  </a>
+</div>
+
+        <!-- CIT Badge -->
+        <div class="cit-badge rounded-2xl p-6 text-white text-center mb-8">
+          <div class="flex items-center justify-center gap-3 mb-2">
+            <span class="text-3xl">🎓</span>
+            <span class="font-bold text-lg">MC246 - Young Instructional Designer</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+          <button onclick="goBack()" class="flex items-center gap-2 px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-semibold text-gray-700 transition-colors">
+            ← Back
+          </button>
+          <div></div> <!-- Empty div for spacing -->
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 text-white py-8 mt-12">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="text-2xl">🛡️</span>
+          <span class="font-bold">Stop Bullying!</span>
+        </div>
+        <p class="text-purple-300 text-sm mb-2">MC246 - Young Instructional Designer</p>
+        <p class="text-purple-400 text-xs">email: nadzirah.indra22@gmail.com</p>
+        <p class="text-purple-400 text-xs">Creating a safer world, one lesson at a time 💜</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      site_title: 'Stop Bullying!',
+      homepage_heading: 'Together We Can Stop Bullying! 🌟',
+      primary_color: '#7c3aed',
+      secondary_color: '#f5f3ff',
+      text_color: '#1f2937',
+      accent_color: '#ec4899',
+      background_color: '#fef3f2'
+    };
+
+    let config = { ...defaultConfig };
+    let currentPage = 'home';
+    let pageHistory = [];
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          applyConfig();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                cfg.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                cfg.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => cfg.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                cfg.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['site_title', cfg.site_title || defaultConfig.site_title],
+          ['homepage_heading', cfg.homepage_heading || defaultConfig.homepage_heading]
+        ])
+      });
+    }
+
+    function applyConfig() {
+      // Apply text content
+      const siteTitle = document.getElementById('site-title');
+      if (siteTitle) {
+        siteTitle.textContent = config.site_title || defaultConfig.site_title;
+      }
+
+      const homepageHeading = document.getElementById('homepage-heading');
+      if (homepageHeading) {
+        homepageHeading.innerHTML = (config.homepage_heading || defaultConfig.homepage_heading).replace('\n', '<br>');
+      }
+
+      // Apply colors
+      const app = document.getElementById('app');
+      if (app) {
+        const bg = config.background_color || defaultConfig.background_color;
+        app.style.background = `linear-gradient(180deg, ${bg} 0%, ${adjustColor(bg, -5)} 50%, ${adjustColor(bg, -10)} 100%)`;
+      }
+    }
+
+    function adjustColor(hex, percent) {
+      const num = parseInt(hex.replace('#', ''), 16);
+      const amt = Math.round(2.55 * percent);
+      const R = (num >> 16) + amt;
+      const G = (num >> 8 & 0x00FF) + amt;
+      const B = (num & 0x0000FF) + amt;
+      return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+    }
+
+    // Navigation function
+    function navigateTo(page, fromBackButton = false) {
+      // If not coming from back button, add current page to history
+      if (!fromBackButton && currentPage && page !== currentPage) {
+        pageHistory.push(currentPage);
+        // Update browser history
+        window.history.pushState({ page }, '', `#${page}`);
+      }
+      
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      
+      // Show target page
+      const targetPage = document.getElementById('page-' + page);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+        currentPage = page;
+      }
+
+      // Update nav active state
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.page === page) {
+          link.classList.add('active');
+        }
+      });
+
+      // Update progress bar
+      updateProgress(page);
+
+      // Close mobile menu
+      document.getElementById('mobile-menu').classList.add('hidden');
+
+      // Scroll to top
+      document.getElementById('app').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Back function
+    function goBack() {
+      if (pageHistory.length > 0) {
+        const previousPage = pageHistory.pop();
+        window.history.back();
+        navigateTo(previousPage, true);
+      } else {
+        // If no history, go to home
+        navigateTo('home', true);
+      }
+    }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function(event) {
+      if (pageHistory.length > 0) {
+        const previousPage = pageHistory.pop();
+        navigateTo(previousPage, true);
+      } else {
+        navigateTo('home', true);
+      }
+    });
+
+    function updateProgress(page) {
+      const progressBar = document.getElementById('progress-bar');
+      const progressMap = {
+        'home': 0,
+        'topic1': 33,
+        'topic2': 66,
+        'topic3': 100
+      };
+      progressBar.style.width = (progressMap[page] || 0) + '%';
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Accordion functionality
+    function toggleAccordion(id) {
+      const content = document.getElementById(id + '-content');
+      const icon = document.getElementById(id + '-icon');
+      
+      if (content.classList.contains('open')) {
+        content.classList.remove('open');
+        icon.textContent = '+';
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        // Close all others
+        document.querySelectorAll('.accordion-content').forEach(ac => ac.classList.remove('open'));
+        document.querySelectorAll('[id$="-icon"]').forEach(ic => {
+          ic.textContent = '+';
+          ic.style.transform = 'rotate(0deg)';
+        });
+        
+        content.classList.add('open');
+        icon.textContent = '−';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // Quiz functionality
+    function checkQuiz1(answer) {
+      const result = document.getElementById('quiz1-result');
+      result.classList.remove('hidden');
+      
+      if (answer === 'social') {
+        result.innerHTML = '<div class="bg-green-400/30 rounded-xl p-4"><span class="text-2xl">✅</span> Correct! Social bullying includes spreading rumours about someone.</div>';
+      } else {
+        result.innerHTML = '<div class="bg-red-400/30 rounded-xl p-4"><span class="text-2xl">❌</span> Not quite! The correct answer is B) Social Bullying. Social bullying includes spreading rumours and excluding others.</div>';
+      }
+    }
+
+    // Pledge functionality
+    function takePledge() {
+      const pledgeBtn = document.getElementById('pledge-btn');
+      const pledgeResult = document.getElementById('pledge-result');
+      
+      pledgeBtn.classList.add('hidden');
+      pledgeResult.classList.remove('hidden');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for hash in URL
+      const hash = window.location.hash.substring(1);
+      if (hash && ['home', 'topic1', 'topic2', 'topic3'].includes(hash)) {
+        navigateTo(hash);
+      } else {
+        navigateTo('home');
+      }
+      applyConfig();
+    });
+  </script>
+</body>
+</html>
