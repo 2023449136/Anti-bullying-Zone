@@ -568,11 +568,160 @@
               </div>
             </div>
           </div>
-          
-          <div align="center">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/1xZCfov16XE?si=9h8VS-9BNH2N2UXb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <p>Let's have a look on how to be a helper!</p>
+			
+			<!-- Game Section: Bullying Effects Survivor -->
+<div class="bg-gradient-to-r from-rose-500 to-pink-600 rounded-2xl p-6 md:p-8 text-white mb-8">
+  <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+    <span>🎮</span> Bullying Effects Survivor Game
+  </h3>
+  <p class="mb-4 opacity-90">Experience how bullying affects mental health, academics, and social life through this interactive game. Make choices and see the consequences!</p>
+  
+  <div id="game-container" class="bg-white/20 backdrop-blur-sm rounded-xl p-6">
+    <!-- Game Intro -->
+    <div id="game-intro">
+      <div class="text-center mb-6">
+        <span class="text-5xl block mb-4">💔</span>
+        <h4 class="text-lg font-bold mb-2">Bullying Effects Survivor</h4>
+        <p class="text-sm opacity-90 mb-6">You'll play as Alex, a student experiencing different bullying situations. Each choice affects Alex's emotional, academic, and social health.</p>
+        <button onclick="startGame()" class="px-6 py-3 bg-white text-rose-600 font-bold rounded-full hover:scale-105 transition-transform">
+          Start Game 🚀
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-4 mt-6">
+        <div class="text-center">
+          <div class="text-2xl mb-1">😢</div>
+          <div class="text-xs font-semibold">Emotional Health</div>
+          <div id="health-emotional" class="h-2 bg-white/30 rounded-full mt-1">
+            <div id="health-emotional-bar" class="h-full bg-green-400 rounded-full" style="width: 100%"></div>
           </div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl mb-1">📚</div>
+          <div class="text-xs font-semibold">Academic Score</div>
+          <div id="health-academic" class="h-2 bg-white/30 rounded-full mt-1">
+            <div id="health-academic-bar" class="h-full bg-blue-400 rounded-full" style="width: 100%"></div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl mb-1">👥</div>
+          <div class="text-xs font-semibold">Social Life</div>
+          <div id="health-social" class="h-2 bg-white/30 rounded-full mt-1">
+            <div id="health-social-bar" class="h-full bg-purple-400 rounded-full" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Game Screen (hidden initially) -->
+    <div id="game-screen" class="hidden">
+      <!-- Scenario Display -->
+      <div id="scenario" class="mb-6 p-4 bg-white/10 rounded-xl">
+        <div id="scenario-text" class="font-medium"></div>
+        <div id="scenario-context" class="text-sm opacity-80 mt-2"></div>
+      </div>
+      
+      <!-- Choices -->
+      <div id="choices" class="space-y-3 mb-6"></div>
+      
+      <!-- Consequence Display -->
+      <div id="consequence" class="hidden p-4 bg-black/20 rounded-xl mb-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span id="consequence-icon" class="text-xl"></span>
+          <span id="consequence-title" class="font-bold"></span>
+        </div>
+        <p id="consequence-text" class="text-sm"></p>
+      </div>
+      
+      <!-- Game Stats -->
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="text-center">
+          <div class="text-xs font-semibold mb-1">Emotional</div>
+          <div class="relative">
+            <div id="game-emotional-bar" class="h-4 bg-white/30 rounded-full overflow-hidden">
+              <div id="game-emotional-fill" class="h-full bg-gradient-to-r from-green-400 to-emerald-500" style="width: 100%"></div>
+            </div>
+            <div id="game-emotional-value" class="text-xs mt-1 font-bold">100%</div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs font-semibold mb-1">Academic</div>
+          <div class="relative">
+            <div id="game-academic-bar" class="h-4 bg-white/30 rounded-full overflow-hidden">
+              <div id="game-academic-fill" class="h-full bg-gradient-to-r from-blue-400 to-cyan-500" style="width: 100%"></div>
+            </div>
+            <div id="game-academic-value" class="text-xs mt-1 font-bold">100%</div>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs font-semibold mb-1">Social</div>
+          <div class="relative">
+            <div id="game-social-bar" class="h-4 bg-white/30 rounded-full overflow-hidden">
+              <div id="game-social-fill" class="h-full bg-gradient-to-r from-purple-400 to-pink-500" style="width: 100%"></div>
+            </div>
+            <div id="game-social-value" class="text-xs mt-1 font-bold">100%</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Game Navigation -->
+      <div class="flex justify-between">
+        <button onclick="restartGame()" class="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
+          🔄 Restart
+        </button>
+        <div id="game-progress" class="text-sm opacity-80">
+          Scenario <span id="current-scenario">1</span>/4
+        </div>
+        <button onclick="nextScenario()" class="px-4 py-2 bg-white text-rose-600 font-semibold rounded-lg hover:scale-105 transition-transform">
+          Continue →
+        </button>
+      </div>
+    </div>
+    
+    <!-- Game Over Screen -->
+    <div id="game-over" class="hidden text-center">
+      <div class="mb-6">
+        <span id="game-result-emoji" class="text-5xl block mb-4">🏆</span>
+        <h4 id="game-result-title" class="text-xl font-bold mb-2">Game Complete!</h4>
+        <p id="game-result-text" class="text-sm opacity-90 mb-4"></p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full">
+          <span>Final Score:</span>
+          <span id="final-score" class="font-bold text-lg">0</span>
+          <span>/100</span>
+        </div>
+      </div>
+      
+      <!-- Final Health Bars -->
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="text-center">
+          <div class="text-xs font-semibold mb-1">Emotional</div>
+          <div class="text-lg font-bold" id="final-emotional">0%</div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs font-semibold mb-1">Academic</div>
+          <div class="text-lg font-bold" id="final-academic">0%</div>
+        </div>
+        <div class="text-center">
+          <div class="text-xs font-semibold mb-1">Social</div>
+          <div class="text-lg font-bold" id="final-social">0%</div>
+        </div>
+      </div>
+      
+      <div class="bg-white/10 rounded-xl p-4 mb-6 text-left">
+        <h5 class="font-bold mb-2">What This Shows:</h5>
+        <p class="text-xs opacity-90 mb-2">• Low emotional health = anxiety, depression, low self-esteem</p>
+        <p class="text-xs opacity-90 mb-2">• Low academic score = poor concentration, lower grades</p>
+        <p class="text-xs opacity-90">• Low social life = isolation, difficulty making friends</p>
+      </div>
+      
+      <button onclick="restartGame()" class="px-6 py-3 bg-white text-rose-600 font-bold rounded-full hover:scale-105 transition-transform">
+        Play Again 🔄
+      </button>
+    </div>
+  </div>
+</div>
+          
+    
 
           <!-- CIT Badge -->
           <div class="cit-badge rounded-2xl p-6 text-white text-center mb-8">
@@ -651,6 +800,12 @@
               If you witness bullying, your actions can make a <strong class="text-amber-600">big difference</strong>. Standing up against bullying helps create a safer and more respectful environment for everyone. Even <strong class="text-amber-600">small actions</strong> can help stop the behavior and support those who are being targeted.
             </p>
           </div>
+			
+			 <div align="center">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/1xZCfov16XE?si=9h8VS-9BNH2N2UXb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <p>Let's have a look on how to be a helper!</p>
+          </div>
+
 
           <div class="grid md:grid-cols-2 gap-6">
             <!-- Speak Up -->
@@ -803,7 +958,7 @@
           <div class="bg-white/20 backdrop-blur-sm rounded-xl p-8 text-center">
   <span class="text-4xl mb-4 block">🎮</span>
   <p>Kahoot quiz would be embedded here</p>
-  <a href="https://create.kahoot.it/share/bullying/91eb1722-f999-42e8-8ea6-0833e1e30849" 
+  <a href="https://kahoot.it/challenge/06475513?challenge-id=19071641-4de8-4cb0-963c-c0b676702a2c_1768934901349" 
      target="_blank"
      class="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full hover:from-purple-600 hover:to-pink-600 hover:scale-105 transition-all duration-300 shadow-lg">
     🎯 Click here to play the Kahoot!
@@ -1063,7 +1218,300 @@
       pledgeBtn.classList.add('hidden');
       pledgeResult.classList.remove('hidden');
     }
+// Game variables
+let gameState = {
+  currentScenario: 0,
+  emotionalHealth: 100,
+  academicScore: 100,
+  socialLife: 100,
+  scenariosCompleted: 0,
+  totalScenarios: 4,
+  choiceMade: false
+};
 
+// Game scenarios data
+const gameScenarios = [
+  {
+    id: 1,
+    title: "Verbal Bullying in Class",
+    text: "Some classmates keep calling you hurtful names during breaks. They laugh when you get upset.",
+    context: "This happens almost every day now.",
+    choices: [
+      {
+        text: "Ignore them and hope they stop",
+        emotional: -20,
+        academic: -10,
+        social: -15,
+        consequence: "You feel more anxious in class, find it hard to concentrate, and avoid group activities.",
+        icon: "😔"
+      },
+      {
+        text: "Tell a teacher about what's happening",
+        emotional: +10,
+        academic: +5,
+        social: 0,
+        consequence: "The teacher addresses the issue. You feel supported but some classmates avoid you.",
+        icon: "🛡️"
+      },
+      {
+        text: "Stand up for yourself calmly",
+        emotional: +15,
+        academic: 0,
+        social: +10,
+        consequence: "The bullying decreases. You gain confidence and make new friends who respect you.",
+        icon: "💪"
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Social Exclusion",
+    text: "Your friends suddenly stop inviting you to hang out. They make plans in front of you but don't include you.",
+    context: "You used to be part of this group for years.",
+    choices: [
+      {
+        text: "Try harder to fit in by changing yourself",
+        emotional: -25,
+        academic: -15,
+        social: -20,
+        consequence: "You lose self-confidence, grades drop from stress, and feel lonelier than ever.",
+        icon: "😞"
+      },
+      {
+        text: "Confront them about why you're being excluded",
+        emotional: -5,
+        academic: 0,
+        social: -10,
+        consequence: "They deny it's intentional. The situation remains awkward and unresolved.",
+        icon: "🗣️"
+      },
+      {
+        text: "Join a club or activity to meet new people",
+        emotional: +10,
+        academic: +5,
+        social: +20,
+        consequence: "You discover new interests and make genuine friends who appreciate you.",
+        icon: "🌟"
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Cyberbullying",
+    text: "Someone created a fake social media account pretending to be you, posting embarrassing comments.",
+    context: "Other students are laughing and sharing the posts.",
+    choices: [
+      {
+        text: "Delete your real accounts and stay offline",
+        emotional: -20,
+        academic: -5,
+        social: -25,
+        consequence: "You become socially isolated, miss important school updates, and feel disconnected.",
+        icon: "📵"
+      },
+      {
+        text: "Report the account and save evidence",
+        emotional: +5,
+        academic: 0,
+        social: -5,
+        consequence: "The fake account gets removed. You learn to be more careful online but still feel vulnerable.",
+        icon: "📱"
+      },
+      {
+        text: "Report it and talk to a counselor about it",
+        emotional: +15,
+        academic: +5,
+        social: +5,
+        consequence: "You get emotional support, learn coping strategies, and the school addresses cyberbullying.",
+        icon: "👨‍🏫"
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "Academic Sabotage",
+    text: "A classmate spreads rumors that you cheated on a test. Other students start avoiding you.",
+    context: "You studied really hard for that test and got a good grade.",
+    choices: [
+      {
+        text: "Stop trying in school to avoid attention",
+        emotional: -15,
+        academic: -30,
+        social: -10,
+        consequence: "Your grades plummet, you lose interest in learning, and teachers notice the change.",
+        icon: "📉"
+      },
+      {
+        text: "Ask the teacher to publicly clear your name",
+        emotional: +10,
+        academic: +10,
+        social: 0,
+        consequence: "The teacher confirms your honesty. Some students apologize, others remain distant.",
+        icon: "✅"
+      },
+      {
+        text: "Focus on your work and help others study",
+        emotional: +20,
+        academic: +15,
+        social: +15,
+        consequence: "Your reputation improves as a hard worker. You gain respect and genuine friendships.",
+        icon: "📚"
+      }
+    ]
+  }
+];
+
+// Game functions
+function startGame() {
+  document.getElementById('game-intro').classList.add('hidden');
+  document.getElementById('game-screen').classList.remove('hidden');
+  document.getElementById('game-over').classList.add('hidden');
+  
+  // Reset game state
+  gameState = {
+    currentScenario: 0,
+    emotionalHealth: 100,
+    academicScore: 100,
+    socialLife: 100,
+    scenariosCompleted: 0,
+    totalScenarios: gameScenarios.length,
+    choiceMade: false
+  };
+  
+  updateGameUI();
+  loadScenario();
+}
+
+function loadScenario() {
+  if (gameState.currentScenario >= gameScenarios.length) {
+    endGame();
+    return;
+  }
+  
+  const scenario = gameScenarios[gameState.currentScenario];
+  document.getElementById('scenario-text').textContent = scenario.text;
+  document.getElementById('scenario-context').textContent = scenario.context;
+  document.getElementById('current-scenario').textContent = gameState.currentScenario + 1;
+  
+  // Clear previous choices
+  const choicesContainer = document.getElementById('choices');
+  choicesContainer.innerHTML = '';
+  
+  // Add new choices
+  scenario.choices.forEach((choice, index) => {
+    const choiceButton = document.createElement('button');
+    choiceButton.className = 'w-full text-left p-4 bg-white/10 hover:bg-white/20 rounded-xl transition-colors border border-white/20';
+    choiceButton.innerHTML = `
+      <div class="flex items-center justify-between">
+        <span>${choice.text}</span>
+        <span class="text-lg">${choice.icon}</span>
+      </div>
+    `;
+    choiceButton.onclick = () => makeChoice(index);
+    choicesContainer.appendChild(choiceButton);
+  });
+  
+  // Hide consequence from previous choice
+  document.getElementById('consequence').classList.add('hidden');
+  gameState.choiceMade = false;
+}
+
+function makeChoice(choiceIndex) {
+  if (gameState.choiceMade) return;
+  
+  const scenario = gameScenarios[gameState.currentScenario];
+  const choice = scenario.choices[choiceIndex];
+  
+  // Update health stats
+  gameState.emotionalHealth = Math.max(0, Math.min(100, gameState.emotionalHealth + choice.emotional));
+  gameState.academicScore = Math.max(0, Math.min(100, gameState.academicScore + choice.academic));
+  gameState.socialLife = Math.max(0, Math.min(100, gameState.socialLife + choice.social));
+  
+  // Show consequence
+  const consequenceDiv = document.getElementById('consequence');
+  document.getElementById('consequence-icon').textContent = choice.icon;
+  document.getElementById('consequence-title').textContent = 'Consequence:';
+  document.getElementById('consequence-text').textContent = choice.consequence;
+  consequenceDiv.classList.remove('hidden');
+  
+  // Highlight the selected choice
+  const choiceButtons = document.querySelectorAll('#choices button');
+  choiceButtons.forEach((btn, idx) => {
+    if (idx === choiceIndex) {
+      btn.classList.add('bg-white/30', 'border-white/40');
+    } else {
+      btn.classList.add('opacity-50');
+    }
+    btn.disabled = true;
+  });
+  
+  gameState.choiceMade = true;
+  gameState.scenariosCompleted++;
+  updateGameUI();
+}
+
+function nextScenario() {
+  if (!gameState.choiceMade) {
+    alert('Please make a choice first!');
+    return;
+  }
+  
+  gameState.currentScenario++;
+  if (gameState.currentScenario < gameScenarios.length) {
+    loadScenario();
+  } else {
+    endGame();
+  }
+}
+
+function updateGameUI() {
+  // Update health bars
+  document.getElementById('game-emotional-fill').style.width = `${gameState.emotionalHealth}%`;
+  document.getElementById('game-academic-fill').style.width = `${gameState.academicScore}%`;
+  document.getElementById('game-social-fill').style.width = `${gameState.socialLife}%`;
+  
+  // Update health values
+  document.getElementById('game-emotional-value').textContent = `${gameState.emotionalHealth}%`;
+  document.getElementById('game-academic-value').textContent = `${gameState.academicScore}%`;
+  document.getElementById('game-social-value').textContent = `${gameState.socialLife}%`;
+}
+
+function endGame() {
+  document.getElementById('game-screen').classList.add('hidden');
+  document.getElementById('game-over').classList.remove('hidden');
+  
+  // Calculate final score
+  const finalScore = Math.round((gameState.emotionalHealth + gameState.academicScore + gameState.socialLife) / 3);
+  document.getElementById('final-score').textContent = finalScore;
+  
+  // Update final stats
+  document.getElementById('final-emotional').textContent = `${gameState.emotionalHealth}%`;
+  document.getElementById('final-academic').textContent = `${gameState.academicScore}%`;
+  document.getElementById('final-social').textContent = `${gameState.socialLife}%`;
+  
+  // Determine result message
+  const resultEmoji = document.getElementById('game-result-emoji');
+  const resultTitle = document.getElementById('game-result-title');
+  const resultText = document.getElementById('game-result-text');
+  
+  if (finalScore >= 80) {
+    resultEmoji.textContent = '🏆';
+    resultTitle.textContent = 'Resilience Champion!';
+    resultText.textContent = 'You navigated bullying situations with great coping skills! Your healthy responses minimized the negative effects.';
+  } else if (finalScore >= 50) {
+    resultEmoji.textContent = '✨';
+    resultTitle.textContent = 'Learning and Growing';
+    resultText.textContent = 'You experienced some effects of bullying but learned valuable lessons. Seeking support makes a big difference!';
+  } else {
+    resultEmoji.textContent = '💔';
+    resultTitle.textContent = 'The Heavy Impact';
+    resultText.textContent = 'This shows how severe bullying effects can be without proper support. Remember: help is always available!';
+  }
+}
+
+function restartGame() {
+  startGame();
+}
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       // Check for hash in URL
