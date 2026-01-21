@@ -165,11 +165,88 @@
     }
     
 
-
     .pinterest-container {
       display: flex;
       justify-content: center;
       margin: 20px 0;
+    }
+    
+    /* New styles for Penal Code section */
+    .law-section {
+      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+      border-left: 5px solid #4f46e5;
+      transition: all 0.3s ease;
+    }
+    
+    .law-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .law-divider {
+      background: linear-gradient(90deg, transparent, #818cf8, transparent);
+      height: 2px;
+      margin: 1.5rem 0;
+    }
+    
+    .penalty-box {
+      background: linear-gradient(to right, #fee2e2, #fef2f2);
+      border-left: 4px solid #ef4444;
+    }
+    
+    .law-card {
+      background: white;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border-top: 4px solid;
+    }
+    
+    .law-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+    
+    .law-card-header {
+      padding: 1.25rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: white;
+    }
+    
+    .law-card-content {
+      padding: 1.25rem;
+    }
+    
+    .law-gavel-icon {
+      color: #f59e0b;
+    }
+    
+    .law-shield-icon {
+      color: #10b981;
+    }
+    
+    .law-highlight {
+      background: linear-gradient(135deg, #dc2626, #7c3aed);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .law-highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
     }
   </style>
 </head>
@@ -222,7 +299,7 @@
               📘 MC246 - Young Instructional Designer
             </div>
             <h1 id="homepage-heading" class="text-4xl md:text-6xl font-black mb-4 bounce-in">
-              Together We Can<br>Stop Bullying! 🌟
+              Be a Buddy, Not a Bully. 
             </h1>
             <p class="text-lg md:text-xl opacity-90 max-w-2xl mx-auto mb-8">
               Learn about bullying, understand its effects, and discover how YOU can make a difference. 
@@ -294,12 +371,190 @@
             </div>
           </div>
         </div>
-		  
-		  <!-- Pinterest Links -->
-      
-      <div class="pinterest-container">
-        <iframe src="https://assets.pinterest.com/ext/embed.html?id=978266350333984229" height="438" width="600" frameborder="0" scrolling="no"></iframe>
-      </div>
+
+        <!-- ===================================================================== -->
+        <!-- AMENDMENT TO THE PENAL CODE SECTION - ADDED TO HOMEPAGE -->
+        <!-- ===================================================================== -->
+        <div class="law-section rounded-2xl p-6 md:p-8 shadow-lg mb-8">
+          <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-black text-gray-800 mb-3">
+              <span class="text-4xl mr-2">⚖️</span>
+              AMENDMENT TO THE PENAL CODE (ACT A1750)
+            </h2>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-purple-600 text-white rounded-full font-semibold text-sm">
+              <span>🚨 BULLYING & HARASSMENT</span>
+              <span class="bg-white/20 px-2 py-1 rounded-full">Effective: July 2025</span>
+            </div>
+          </div>
+          
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 mb-6">
+            <p class="text-center text-gray-700 text-lg font-medium">
+              Sections <span class="font-bold text-purple-700">507B to 507G</span> are aimed at addressing issues of bullying, harassment, threats, and insults (including online).
+            </p>
+          </div>
+          
+          <div class="law-divider"></div>
+          
+          <!-- Law Cards Grid -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Section 507B -->
+            <div class="law-card" style="border-top-color: #ef4444;">
+              <div class="law-card-header" style="background: linear-gradient(to right, #dc2626, #ef4444);">
+                Section 507B
+              </div>
+              <div class="law-card-content">
+                <p class="text-gray-700 mb-4">
+                  Causing harassment, anxiety, fear, or worry.
+                </p>
+                <div class="penalty-box rounded-lg p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xl law-gavel-icon">⚖️</span>
+                    <span class="font-bold text-red-700">Penalty:</span>
+                  </div>
+                  <p class="text-gray-800 font-semibold">
+                    Imprisonment of up to 3 years, a fine, or both.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Section 507C -->
+            <div class="law-card" style="border-top-color: #f59e0b;">
+              <div class="law-card-header" style="background: linear-gradient(to right, #d97706, #f59e0b);">
+                Section 507C
+              </div>
+              <div class="law-card-content">
+                <p class="text-gray-700 mb-4">
+                  Harassment that is perceived or received. Emphasizes the victim's perception.
+                </p>
+                <div class="penalty-box rounded-lg p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xl law-gavel-icon">⚖️</span>
+                    <span class="font-bold text-red-700">Penalty:</span>
+                  </div>
+                  <p class="text-gray-800 font-semibold">
+                    Imprisonment of up to 1 year, a fine, or both.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Section 507D -->
+            <div class="law-card" style="border-top-color: #dc2626;">
+              <div class="law-card-header" style="background: linear-gradient(to right, #991b1b, #dc2626);">
+                Section 507D
+              </div>
+              <div class="law-card-content">
+                <p class="text-gray-700 mb-4">
+                  Harassment that leads to danger or suicide.
+                </p>
+                <div class="penalty-box rounded-lg p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xl law-gavel-icon">⚖️</span>
+                    <span class="font-bold text-red-700">Penalty:</span>
+                  </div>
+                  <p class="text-gray-800 font-semibold">
+                    Imprisonment of up to 10 years.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Section 507EF -->
+            <div class="law-card" style="border-top-color: #3b82f6;">
+              <div class="law-card-header" style="background: linear-gradient(to right, #1d4ed8, #3b82f6);">
+                Section 507EF
+              </div>
+              <div class="law-card-content">
+                <p class="text-gray-700 mb-4">
+                  Cyberbullying / disclosure of identity information.
+                </p>
+                <div class="penalty-box rounded-lg p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xl law-gavel-icon">⚖️</span>
+                    <span class="font-bold text-red-700">Penalty:</span>
+                  </div>
+                  <p class="text-gray-800 font-semibold">
+                    A fine not exceeding RM20,000, or imprisonment not exceeding 3 years, or both.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Section 507G -->
+            <div class="law-card" style="border-top-color: #10b981;">
+              <div class="law-card-header" style="background: linear-gradient(to right, #059669, #10b981);">
+                Section 507G
+              </div>
+              <div class="law-card-content">
+                <p class="text-gray-700 mb-4">
+                  Serves as an interpretation provision and gives additional power to the court to issue protection orders.
+                </p>
+                <div class="bg-gradient-to-r from-green-50 to-emerald-100 rounded-lg p-4 border-l-4 border-emerald-500">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xl law-shield-icon">🛡️</span>
+                    <span class="font-bold text-emerald-700">Function:</span>
+                  </div>
+                  <p class="text-gray-800 font-semibold">
+                    Interpretation and court protection orders.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Bullying is a Crime Card -->
+            <div class="law-card" style="border-top-color: #7c3aed;">
+              <div class="law-card-header" style="background: linear-gradient(to right, #6d28d9, #8b5cf6);">
+                <div class="flex items-center gap-2">
+                  <span>🚨</span>
+                  <span>Important Notice</span>
+                </div>
+              </div>
+              <div class="law-card-content flex flex-col h-full">
+                <div class="flex-grow">
+                  <p class="text-gray-700 mb-4">
+                    The law clearly defines bullying and harassment as criminal offenses with serious consequences.
+                  </p>
+                  <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+                    <p class="text-sm text-gray-600">
+                      These amendments strengthen legal protection against all forms of bullying, especially cyberbullying which has become more prevalent.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="law-divider"></div>
+          
+          <!-- Final Message -->
+          <div class="law-highlight rounded-2xl p-6 md:p-8 text-white text-center">
+            <h3 class="text-2xl md:text-3xl font-black mb-4">
+              BULLYING IS NOT A JOKE,<br>
+              BULLYING IS A CRIME!
+            </h3>
+            <p class="text-xl font-semibold opacity-90">
+              Let's stop bullying! 🛡️
+            </p>
+            <div class="mt-6 flex justify-center">
+              <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+                <span class="text-2xl">⚖️</span>
+                <span class="font-bold">Know the Law. Stop Bullying.</span>
+                <span class="text-2xl">💜</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ===================================================================== -->
+        <!-- END OF PENAL CODE SECTION -->
+        <!-- ===================================================================== -->
+
+        <!-- Pinterest Links -->
+        <div class="pinterest-container">
+          <iframe src="https://assets.pinterest.com/ext/embed.html?id=978266350333984229" height="438" width="600" frameborder="0" scrolling="no"></iframe>
+        </div>
 
         <!-- CIT Badge -->
         <div class="cit-badge rounded-2xl p-6 text-white text-center">
@@ -853,7 +1108,7 @@
             <div class="inline-block bg-white/20 backdrop-blur-sm rounded-xl p-6">
               <span class="text-5xl block mb-2">🎉</span>
               <p class="font-bold text-lg">Thank you for taking the pledge!</p>
-              <p class="text-sm opacity-80">Together, we can stop bullying.</p>
+              <p class="text-sm opacity-80">Be a Buddy, Not a Bully.</p>
             </div>
           </div>
         </div>
@@ -1006,7 +1261,7 @@
     // Default configuration
     const defaultConfig = {
       site_title: 'Stop Bullying!',
-      homepage_heading: 'Together We Can Stop Bullying! 🌟',
+      homepage_heading: 'Be a Buddy, Not a Bully. 🌟',
       primary_color: '#7c3aed',
       secondary_color: '#f5f3ff',
       text_color: '#1f2937',
